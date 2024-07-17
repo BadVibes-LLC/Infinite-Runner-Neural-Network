@@ -1,8 +1,8 @@
 extends Node2D
 
 var ai_brain = null
-var AI = preload("res://ai.tscn")
-var Obstacle = preload("res://obstacle.tscn")
+var AI = preload("res://Scenes/ai.tscn")
+var Obstacle = preload("res://Scenes/obstacle.tscn")
 var ob_array = []
 var run = 0
 var reward = 0

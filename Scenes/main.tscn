@@ -1,15 +1,15 @@
 [gd_scene load_steps=6 format=3 uid="uid://cvhsykuybxsi"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_m2ikl"]
-[ext_resource type="PackedScene" uid="uid://jlhkqnvw56ci" path="res://ai.tscn" id="2_e1esr"]
-[ext_resource type="Script" path="res://PPO Neural Network/brain.gd" id="2_l3mfs"]
+[ext_resource type="Script" path="res://Scripts/main.gd" id="1_3jtmy"]
+[ext_resource type="Script" path="res://PPO Neural Network/brain.gd" id="2_30bhl"]
+[ext_resource type="PackedScene" uid="uid://jlhkqnvw56ci" path="res://Scenes/ai.tscn" id="3_n1o8j"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_in6e3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jvdhu"]
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_m2ikl")
+script = ExtResource("1_3jtmy")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -41,9 +41,9 @@ offset_bottom = 126.0
 color = Color(0.203922, 0.203922, 0.203922, 1)
 
 [node name="Brain" type="Node" parent="."]
-script = ExtResource("2_l3mfs")
+script = ExtResource("2_30bhl")
 
-[node name="AI" parent="Brain" instance=ExtResource("2_e1esr")]
+[node name="AI" parent="Brain" instance=ExtResource("3_n1o8j")]
 position = Vector2(132, 449)
 
 [node name="RayCast2D" type="RayCast2D" parent="Brain"]
