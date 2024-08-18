@@ -19,29 +19,19 @@ func get_action(states) -> Array:
 
 # In host, collect each of these in one frame. States should always come first
 func collect(states=null,action=null,reward=null,next_states=null):
-	var trajectory_buffer = [states,action,reward,next_states]
-	if states != null:
-		trajectory_buffer[0] = states
-	if action != null:
-		trajectory_buffer[1] = action
-	if reward != null:
-		trajectory_buffer[2] = reward
-	if next_states != null:
-		trajectory_buffer[3] = next_states
 	trajectories.append({
-		"states": trajectory_buffer[0],
-		"action": trajectory_buffer[1],
-		"reward": trajectory_buffer[2],
-		"next_states": trajectory_buffer[3]
+		"states": states,
+		"action": action,
+		"reward": reward,
+		"next_states": next_states
 	})
-	return
 
 func compute_log_probs(action_probs,action):
 	return log(action_probs[action])
 
 func compute_policy_loss_gradient(log_probs: float, advantage: float, old_log_probs: float):
 	var ratio = exp(log_probs - old_log_probs)
-	var clip_value = 2.0
+	var clip_value = 0.2
 	var clipped_ratio = clamp(ratio, 1.0 - clip_value, 1.0 + clip_value)
 	var loss_gradient = -min(ratio * advantage, clipped_ratio * advantage)
 	return loss_gradient
