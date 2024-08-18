@@ -36,14 +36,13 @@ func compute_policy_loss_gradient(log_probs: float, advantage: float, old_log_pr
 	var loss_gradient = -min(ratio * advantage, clipped_ratio * advantage)
 	return loss_gradient
 
-func choose_action(action_probs):
-	var cumulative_prob = 0.0
-	var random_value = randf()
-	for i in range(action_probs.size()):
-		cumulative_prob += action_probs[i]
-		if random_value < cumulative_prob:
-			return i
-	return action_probs.size() - 1
+func choose_action(action_probs: PackedFloat32Array) -> int:
+    var cumulative_sum = action_probs.sum()
+    var random_value = randf() * cumulative_sum
+    var cumulative = 0.0
+    
+    # Find the index where the cumulative sum exceeds the random value
+    return action_probs.size() * random_value / cumulative_sum
 
 func update_policy_network(advantage):
 	for transition in trajectories:
