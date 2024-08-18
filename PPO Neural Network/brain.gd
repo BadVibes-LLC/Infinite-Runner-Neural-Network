@@ -69,9 +69,6 @@ func update_value_network():
 		value_network.update_gradients(states, td_error)
 		return td_error
 
-func get_neuron_weights_and_biases():
-	return null
-
 func end():
 	var advantage = update_value_network()
 	update_policy_network(advantage)
